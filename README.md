@@ -1,38 +1,42 @@
-Role Name
+Filebeat-role
 =========
 
-A brief description of the role goes here.
+Данная роль предназначена для установки Filebeat и сбора системных метрик о хосте в учебных целях.
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+  * Ansible > 2.9
+  * Elasticsearch instance
+  * Kibana instance
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+  variable | Description | Default
+ --- | --- | ---
+ filebeat_version | Устанавливаемая версия Filebeat | 7.14.0
+ filebeat_install_type | Тип установки | remove
+ elastic_instance | Адрес инстанса Elasticsearch | IPv4 хоста `el-instance` при наличии такого в инвентари, в случае его отсутствия - `0.0.0.0`
+ kibana_instance | Адрес инстанса Kibana | IPv4 хоста `k-instance` при наличии такого в инвентари, в случае его отсутствия - `0.0.0.0`
 
-Dependencies
-------------
-
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+``` yml
+- name: Install Filebeat
+  hosts: filebeat
+  roles:
+    - filebeat
+```
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Emil Temerbulatov - студент курса DevOps Netology
