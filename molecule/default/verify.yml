@@ -1,0 +1,14 @@
+---
+# This is an example playbook to execute Ansible tests.
+
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+  - name: Check Filebeat version
+    command:
+      cmd: /usr/share/filebeat/bin/filebeat version
+    register: version
+    changed_when: false
+  - debug: 
+      msg: "{{ version.stdout }}"

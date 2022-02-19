@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: fedora-filebeat
+    image: docker.io/pycontribs/fedora:latest
+    pre_build_image: true
+  - name: centos7-filebeat
+    image: docker.io/pycontribs/centos:7
+    pre_build_image: true
+  - name: centos8-filebeat
+    image: docker.io/pycontribs/centos:8
+    pre_build_image: true
+  - name: ubuntu-filebeat
+    image: docker.io/pycontribs/ubuntu:latest
+    pre_build_image: true
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      all:
+        elastic_instance: 178.154.200.88
+        kibana_instance: 178.154.206.158
+verifier:
+  name: ansible
